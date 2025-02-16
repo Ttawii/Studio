@@ -55,6 +55,7 @@ def download():
         return send_from_directory(app.config['UPLOAD_FOLDER'], music_file, as_attachment=True)
     return redirect(url_for('home'))
 ```
+
 We are provided with the server-side code of this web application. Let’s analyze the code to identify vulnerabilities and determine how to exploit them.
 
 ---
@@ -69,7 +70,9 @@ def home():
     except:
         return render_template('home.html')
 ```
+
 The / endpoint takes a page parameter from the URL and appends .html to it. If a file with that name exists in the templates folder, it renders that page. Otherwise, it defaults to rendering home.html. This behavior is key to exploiting the vulnerability, as we will see later.
+
 ---
 
 ## **/Music** Route
